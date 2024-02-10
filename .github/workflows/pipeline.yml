@@ -15,15 +15,6 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checking your input
-        run: |
-          echo "github.event.pull_request           : $MERGED_RAW"
-          echo "github.event : $MERGED_TRUE_STR"
-          echo "github.event.pull_request.merged  == true  : $MERGED_TRUE_BOOL"
-        env:
-          MERGED_RAW: ${{ github.event.pull_request }}
-          MERGED_TRUE_STR: ${{ github.event }}
-          MERGED_TRUE_BOOL: ${{ github.event.pull_request.merged == true }}
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
