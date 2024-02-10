@@ -13,7 +13,7 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
 })))
 
 /**
- * @returns Main app component
+ * @returns Main app component for the website
  */
 const App = () => {
   const match = useMatch('/pokemon/:name')
