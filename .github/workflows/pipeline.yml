@@ -32,7 +32,6 @@ jobs:
         if: ${{ github.event_name == 'push' }}
   tag_release:
     needs: [simple_deployment_pipeline]
-    if: ${{ github.event.pull_request.merged == true}}
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -48,3 +47,4 @@ jobs:
         WITH_V: true
         PRERELEASE: true
         DEFAULT_BUMP: patch
+      if: ${{ github.event.pull_request.merged == true}}
