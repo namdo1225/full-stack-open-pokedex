@@ -32,10 +32,10 @@ jobs:
           wait-on: http://localhost:9000
       - name: Trigger deployment
         run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' }} && "!contains(github.event.head_commit.message, '#skip')"
   tag_release:
     needs: [simple_deployment_pipeline]
-    if: ${{ github.event.pull_request.merged == true }}
+    if: ${{ github.event.pull_request.merged == true }} && "!contains(github.event.head_commit.message, '#skip')"
     runs-on: ubuntu-20.04
     permissions:
       contents: write
