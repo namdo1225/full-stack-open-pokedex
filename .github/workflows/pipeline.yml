@@ -34,8 +34,8 @@ jobs:
         run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
         if: ${{ github.event_name == 'push' }}
   tag_release:
-    if: github.event.pull_request.merged == true
     needs: [simple_deployment_pipeline]
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-20.04
     permissions:
       contents: write
