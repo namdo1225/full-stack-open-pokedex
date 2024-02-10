@@ -32,7 +32,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
   tag_release:
     needs: [simple_deployment_pipeline]
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true}}
     runs-on: ubuntu-20.04
     permissions:
       contents: write
