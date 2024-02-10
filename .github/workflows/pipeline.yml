@@ -6,7 +6,10 @@ on:
       - main
   pull_request:
     branches: [main]
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed]
+  pull_request_target:
+    branches: [main]
+    types: [closed]
 
 jobs:
   simple_deployment_pipeline:
@@ -32,10 +35,10 @@ jobs:
         if: ${{ github.event_name == 'push' }}
   tag_release:
     needs: [simple_deployment_pipeline]
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-20.04
     permissions:
       contents: write
+    if: github.event.pull_request.merged == true
     steps:
     - uses: actions/checkout@v4
       with:

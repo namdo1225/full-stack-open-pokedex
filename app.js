@@ -13,4 +13,4 @@ app.listen(PORT, () => {
 
 app.get('/health', (_, res) => {
   res.send('ok')
-}) 
+})
