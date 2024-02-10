@@ -6,10 +6,9 @@ on:
       - main
   pull_request:
     branches: [main]
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed]
   pull_request_target:
-    types:
-      - closed
+    types: [closed]
 
 jobs:
   simple_deployment_pipeline:
