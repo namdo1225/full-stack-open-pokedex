@@ -37,16 +37,22 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: success()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          details: Deployed to https://github-action-test.onrender.com/
+          username: namdo1225Test
+          text: Deployment successful - https://github-action-test.onrender.com/
+          description: Deployed to https://github-action-test.onrender.com/
           severity: info
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Discord Webhook Notify - Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
         with:
+          username: namdo1225Test
+          text: Deployment failed - https://github-action-test.onrender.com/
+          description: Error while deploying to https://github-action-test.onrender.com/
+          severity: error
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          details: Error while deploying to https://github-action-test.onrender.com/
-          severity: info
   tag_release:
     needs: [simple_deployment_pipeline]
     if: ${{ github.event.pull_request.merged == true && !contains(github.event.head_commit.message, '#skip') }}
