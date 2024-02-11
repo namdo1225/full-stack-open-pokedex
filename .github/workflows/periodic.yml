@@ -1,8 +1,8 @@
 name: Period health check
 
 on:
-  schedule: # Runs every 5th minute.
-    - cron: '*/1 * * * *'
+  schedule: # Runs every day.
+    - cron: '0 0 * * *'
 
 jobs:
   periodic_health_check:
