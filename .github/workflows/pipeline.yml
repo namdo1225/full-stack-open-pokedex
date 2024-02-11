@@ -33,6 +33,20 @@ jobs:
       - name: Trigger deployment
         run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')}}
+      - name: Discord Webhook Notify
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: success()
+        env:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          details: Deployed to https://github-action-test.onrender.com/
+          severity: info
+      - name: Discord Webhook Notify
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: failure()
+        env:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          details: Error while deploying to https://github-action-test.onrender.com/
+          severity: info
   tag_release:
     needs: [simple_deployment_pipeline]
     if: ${{ github.event.pull_request.merged == true && !contains(github.event.head_commit.message, '#skip') }}
